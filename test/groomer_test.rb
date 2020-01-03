@@ -53,4 +53,25 @@ class GroomerTest < Minitest::Test
     groomer.add_customer(billy)
     assert_equal [joel], groomer.customers_with_oustanding_balances
   end
+
+  def test_it_can_charge_customers
+    groomer = Groomer.new("The Hair Ball")
+    joel = Customer.new("Joel", 2)
+    samson = Pet.new({name: "Samson", type: :dog})
+    sam = Customer.new("Sam", 3)
+    duece = Pet.new({name: "Duece", type: :dog})
+    ozzie = Pet.new({name: "Ozzie", type: :cat})
+    harley = Pet.new({name: "Harley", type: :cat})
+    joel.adopt(samson)
+    joel.adopt(harley)
+    sam.adopt(duece)
+    sam.adopt(ozzie)
+    groomer.add_customer(joel)
+    groomer.add_customer(sam)
+    groomer.charge(joel, samson, "hair cut")
+    groomer.charge(sam, ozzie, "bath")
+
+    assert_equal 40, joel.outstanding_balance
+    assert_equal 60, sam.outstanding_balance
+  end
 end

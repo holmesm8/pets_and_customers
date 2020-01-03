@@ -36,8 +36,8 @@ class CustomerTest < Minitest::Test
 
   def test_it_can_charge_to_increase_outstanding_balance
     joel = Customer.new("Joel", 2)
-    joel.charge(15)
-    joel.charge(7)
+    joel.charge(15, "haircut")
+    joel.charge(7, "washing")
     assert_equal 22, joel.outstanding_balance
   end
 end
